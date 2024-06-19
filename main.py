@@ -21,6 +21,7 @@ target_y = random.randint(0, SCREEN_HEIGHT - target_heigh)
 
 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
+score = 0
 
 running = True
 while running:
@@ -31,12 +32,17 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
             if target_x < mouse_x < target_x + target_width and target_y < mouse_y < target_y + target_heigh:
-                target_x=random.randint(0, SCREEN_WIDTH - target_width)
+                score += 1
+                target_x = random.randint(0, SCREEN_WIDTH - target_width)
                 target_y = random.randint(0, SCREEN_HEIGHT - target_heigh)
+    target_x += 1
+    if target_x > SCREEN_WIDTH:
+        target_x = 0
+        target_y = random.randint(0, SCREEN_HEIGHT - target_heigh)
+        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
 
     screen.blit(target_img, (target_x, target_y))
     pygame.display.update()
-
 pygame.quit()
 
 
